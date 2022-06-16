@@ -59,42 +59,67 @@ class Producer {
 
         const agregarPelicula = document.getElementById("agregarPelicula")
                 agregarPelicula.innerHTML = `
-                <form >
-                <label name="id">Ingresa el numero ID de tu pelicula</label><br>
-                <input type="number" id="id" name="id"></input><br>
+                <form id="form">
+
+                <p>Entra los detalles de tu pelicula</p>
+                <label class="labels" name="id">Ingresa el numero ID de tu pelicula</label><br>
+                <input class="inputs" type="number" id="id" name="id"></input><br>
         
-                <label name="nombre">Ingresa el nombre de tu pelicula</label><br>
-                <input type="text" id="nombre" name="nombre"></input><br>
+                <label class="labels"  name="nombre">Ingresa el nombre de tu pelicula</label><br>
+                <input class="inputs" type="text" id="nombre" name="nombre"></input><br>
         
-                <label name="image">Ingresa el link de la imagen de tu pelicula</label><br>
-                <input type="text" id="image" name="image"></input><br>
+                <label class="labels" name="image">Ingresa el link de la imagen de tu pelicula</label><br>
+                <input class="inputs" type="text" id="image" name="image"></input><br>
         
-                <label name="duracionHoras">Ingresa la duracion de tu pelicula en horas</label><br>
-                <input type="number" id="duracionHoras" name="duracionHoras"></input><br>
+                <label class="labels" name="duracionHoras">Ingresa la duracion de tu pelicula en horas</label><br>
+                <input class="inputs" type="number" id="duracionHoras" name="duracionHoras"></input><br>
         
-                <label name="categoria">Ingresa la categoria de tu pelicula</label><br>
-                <input type="checkbox" class="categorias" value="accion" name="accion">Accion</input><br>
-                <input type="checkbox" class="categorias" value="comedia" name="comedia">Comedia</input><br>
-                <input type="checkbox" class="categorias" value="documental" name="documental">Documental</input><br>
-                <input type="checkbox" class="categorias" value="drama" name="drama">Drama</input><br>
-                <input type="checkbox" class="categorias" value="infantil" name="infantil">Infantil</input><br>
-                <input type="checkbox" class="categorias" value="terror" name="terror">Terror</input><br>
+                <label class="labels" name="categoria">Ingresa la categoria de tu pelicula</label><br>
+                <input type="checkbox" class="categorias labels" value="accion" name="accion">Accion</input><br>
+                <input type="checkbox" class="categorias labels" value="comedia" name="comedia">Comedia</input><br>
+                <input type="checkbox" class="categorias labels" value="documental" name="documental">Documental</input><br>
+                <input type="checkbox" class="categorias labels" value="drama" name="drama">Drama</input><br>
+                <input type="checkbox" class="categorias labels" value="infantil" name="infantil">Infantil</input><br>
+                <input type="checkbox" class="categorias labels" value="terror" name="terror">Terror</input><br>
         
-                <label name="año">Ingresa el año de tu pelicula</label><br>
-                <input type="number" id="año" name="año"></input><br>
+                <label class="labels" name="año">Ingresa el año de tu pelicula</label><br>
+                <input class="inputs" type="number" id="año" name="año"></input><br>
         
-                <label name="rate">Ingresa el rate de tu pelicula</label><br>
-                <input class="rates" type="checkbox" value="rate1" name="rate1">1</input><br>
-                <input class="rates" type="checkbox" value="rate2" name="rate2">2</input><br>
-                <input class="rates" type="checkbox" value="rate3" name="rate3">3</input><br>
-                <input class="rates" type="checkbox" value="rate4" name="rate4">4</input><br>
-                <input class="rates" type="checkbox" value="rate5" name="rate5">5</input><br>
+                <label class="labels" name="rate">Ingresa el rate de tu pelicula</label><br>
+                <input class="rates inputs" type="checkbox" value="rate1" name="rate1">1</input><br>
+                <input class="rates inputs" type="checkbox" value="rate2" name="rate2">2</input><br>
+                <input class="rates inputs" type="checkbox" value="rate3" name="rate3">3</input><br>
+                <input class="rates inputs" type="checkbox" value="rate4" name="rate4">4</input><br>
+                <input class="rates inputs" type="checkbox" value="rate5" name="rate5">5</input><br>
 
                 <input class="boton" type="button" value="Agregar Pelicula" onclick="Netflix.onSubmitAdd()"></input>
 
             </form>
                 `
+
+            let form = document.getElementById("form");
+            form.style.display="flex";
+            form.style.flexDirection="column";
+            form.style.width="auto";
+            form.style.alignItems="center";
+            form.style.background="white";
+
+
+            let labels = document.getElementsByClassName("labels");
+                for (const label of labels) {
+                    label.style.color="red";
+                    label.style.margin="0px";
+                    label.style.padding="0px"
+                }
             
+            let inputs = document.getElementsByClassName("inputs");
+                for (const input of inputs){
+                    input.style.background="transparent";
+                    input.style.border="0";
+                    input.style.borderBottom="2px solid red";
+                    input.display.transition= "border-color 0.2s";
+                }
+
     
     }
     
@@ -146,7 +171,7 @@ class Producer {
         let toRemove = document.getElementById("removerPelicula");
         toRemove.innerHTML = `
         <form>
-            <p>Cual de las peliculas deseas borrar?</p>
+            <p class="labels" >Cual de las peliculas deseas borrar?</p>
             ${checkboxes}
             <input class="boton" type="button" value="Borrar Pelicula" onclick="Netflix.onSubmitRemove()"></input>
         </form>
@@ -274,6 +299,7 @@ for (const boton of botones) {
     boton.style.padding="10px 15px";
     boton.style.color="white"
 }
+
 
 
 
