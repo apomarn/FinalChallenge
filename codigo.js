@@ -45,7 +45,17 @@ function showButtons() {
 
 class Producer {
     constructor(peliculas) {
-        this.peliculas = peliculas
+        const local = localStorage.getItem("peliculas");
+
+        if(!local) {
+            localStorage.setItem("peliculas", JSON.stringify(this.peliculas))
+            this.peliculas = peliculas;
+        } else {
+            this.peliculas = JSON.parse(local);
+        }
+
+       
+
     }
     
     add(){
@@ -117,7 +127,7 @@ class Producer {
                     input.style.background="transparent";
                     input.style.border="0";
                     input.style.borderBottom="2px solid red";
-                    input.display.transition= "border-color 0.2s";
+                    input.style.transition= "border-color 0.2s";
                 }
 
     
@@ -153,6 +163,9 @@ class Producer {
                     console.log({id, nombre, image, duracionHoras, categoria, año, rate})
             
                 this.peliculas.push( new Pelicula({id, nombre, image, duracionHoras, categoria, año, rate}))
+                
+                localStorage.setItem("peliculas", JSON.stringify(this.peliculas))
+                
                 updatingPeliculas(this.peliculas);
                 this.movieQuantity();
                 eraseAddForm();
@@ -170,12 +183,42 @@ class Producer {
         console.log(checkboxes)
         let toRemove = document.getElementById("removerPelicula");
         toRemove.innerHTML = `
-        <form>
+        <form id="form">
             <p class="labels" >Cual de las peliculas deseas borrar?</p>
+            <p class="checkboxes">
             ${checkboxes}
+            </p>
             <input class="boton" type="button" value="Borrar Pelicula" onclick="Netflix.onSubmitRemove()"></input>
         </form>
     `
+
+    let form = document.getElementById("form");
+    form.style.display="flex";
+    form.style.flexDirection="column";
+    form.style.width="auto";
+    form.style.alignItems="center";
+    form.style.background="white";
+
+    let allcheckboxes = document.getElementsByClassName("checkboxes");
+
+    for (const checkbox of allcheckboxes) {
+        checkbox.style.display="flex";
+        checkbox.style.flexDirection="column";
+        checkbox.style.margin="0px";
+        checkbox.style.padding="25px";
+        checkbox.style.borderBottom="1px solid red";
+        checkbox.style.borderTop="1px solid red"
+    }
+   
+
+
+
+    let labels = document.getElementsByClassName("labels");
+        for (const label of labels) {
+            label.style.color="red";
+            label.style.margin="15px 0px";
+            label.style.padding="0px"
+        }
    
     }
 
@@ -192,6 +235,7 @@ class Producer {
         }
 
         this.peliculas = leftPeliculas
+        localStorage.setItem("peliculas", JSON.stringify(this.peliculas))
 
  
          updatingPeliculas(this.peliculas);

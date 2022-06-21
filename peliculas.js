@@ -85,3 +85,11 @@ let peliculas =[
     
         
 ]
+
+// let peliculas_ObjOne = JSON.stringify(peliculas_Obj);
+
+// localStorage.setItem("peliculas", peliculas_ObjOne);
+
+// let peliculas = JSON.parse(localStorage.getItem("peliculas_Obj"));
+
+// console.log(peliculas_ObjOne);
