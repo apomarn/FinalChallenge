@@ -1,8 +1,4 @@
-//agregar
-//borrar
-//ordenar por año
-//recomendar por rate 
-//contador de lista final de peliculas 
+
 
 
 console.log(peliculas)
@@ -19,7 +15,7 @@ class Pelicula {
     }
 }
 
-//form agregar
+
 
 
 function eraseAddForm() {
@@ -160,9 +156,10 @@ class Producer {
                     let rate=this.inputChecked(rates);
             
                 
-                    console.log({id, nombre, image, duracionHoras, categoria, año, rate})
-            
-                this.peliculas.push( new Pelicula({id, nombre, image, duracionHoras, categoria, año, rate}))
+                let newPelicula={id, nombre, image, duracionHoras, categoria, año, rate};
+                
+                this.peliculas = [...this.peliculas, new Pelicula(newPelicula)]
+                // this.peliculas.push( new Pelicula({id, nombre, image, duracionHoras, categoria, año, rate}))
                 
                 localStorage.setItem("peliculas", JSON.stringify(this.peliculas))
                 
@@ -253,6 +250,8 @@ class Producer {
     
             let comparison = 0;
 
+            // añoA > añoB ? comparison = 1 : comparison = -1;
+
             if (añoA > añoB) {
                 comparison = 1;
             } else if (añoA < añoB) {
@@ -268,9 +267,11 @@ class Producer {
 
         let recomendados = []
         for (const pelicula of this.peliculas) {
-            if(pelicula.rate === 4 || pelicula.rate === 5) {
-                recomendados.push(pelicula)
-            }
+
+            pelicula.rate === 4 || pelicula.rate === 5 ? recomendados.push(pelicula): undefined;
+            // if(pelicula.rate === 4 || pelicula.rate === 5) {
+            //     recomendados.push(pelicula)
+            // }
         }
 
         let carousel = document.getElementsByClassName("cadaRecomendado")[0]
@@ -391,12 +392,13 @@ function updatingPeliculas(movies){
 
     for(const pelicula of movies) {
 
+        const {image, nombre} = pelicula;
         let contenedorPelicula = document.createElement("div");
         
     
         contenedorPelicula.innerHTML = `
-           <img class="peliculasImage" src="${pelicula.image}">;
-           <p class="peliculasNombre">${pelicula.nombre}</p>
+           <img class="peliculasImage" src="${image}">;
+           <p class="peliculasNombre">${nombre}</p>
         `
        contenedorPelicula.style.margin="30px";
         listaPeliculass.append(contenedorPelicula)
