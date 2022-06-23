@@ -98,7 +98,7 @@ class Producer {
                 <input class="rates inputs" type="checkbox" value="rate4" name="rate4">4</input><br>
                 <input class="rates inputs" type="checkbox" value="rate5" name="rate5">5</input><br>
 
-                <input class="boton" type="button" value="Agregar Pelicula" onclick="Netflix.onSubmitAdd()"></input>
+                <input id="myBtn" class="boton" type="button" value="Agregar Pelicula" onclick="Netflix.onSubmitAdd()"></input>
 
             </form>
                 `
@@ -154,6 +154,16 @@ class Producer {
                     let año=document.getElementById("duracionHoras").value;
                     let rates= document.getElementsByClassName("rates");
                     let rate=this.inputChecked(rates);
+
+                    
+
+                        Swal.fire({
+                         title: 'Genial!',
+                         text: 'Agregaste una pelicula!',
+                         icon: 'success',
+                         confirmButtonText: 'Cool'
+                        })
+                    
             
                 
                 let newPelicula={id, nombre, image, duracionHoras, categoria, año, rate};
@@ -163,6 +173,10 @@ class Producer {
                 
                 localStorage.setItem("peliculas", JSON.stringify(this.peliculas))
                 
+                
+
+
+
                 updatingPeliculas(this.peliculas);
                 this.movieQuantity();
                 eraseAddForm();
@@ -185,7 +199,7 @@ class Producer {
             <p class="checkboxes">
             ${checkboxes}
             </p>
-            <input class="boton" type="button" value="Borrar Pelicula" onclick="Netflix.onSubmitRemove()"></input>
+            <input id="myBtn" class="boton" type="button" value="Borrar Pelicula" onclick="Netflix.onSubmitRemove()"></input>
         </form>
     `
 
@@ -231,8 +245,18 @@ class Producer {
             }
         }
 
+       
+
         this.peliculas = leftPeliculas
         localStorage.setItem("peliculas", JSON.stringify(this.peliculas))
+
+
+        Swal.fire({
+            title: 'Genial!',
+            text: 'Borraste una pelicula!',
+            icon: 'success',
+            confirmButtonText: 'Cool'
+           })
 
  
          updatingPeliculas(this.peliculas);
