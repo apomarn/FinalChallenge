@@ -1,9 +1,19 @@
 
 
 
-console.log(peliculas)
+async function obtenerPeliculas () {
+   const miJSON = "/peliculas.json"
+   const resp = await fetch(miJSON);
+   const peliculas = await resp.json()
 
-class Pelicula {
+
+
+   console.log(peliculas)
+
+
+
+
+   class Pelicula {
     constructor(pelicula){
         this.id=pelicula.id;
         this.nombre=pelicula.nombre;
@@ -41,18 +51,26 @@ function showButtons() {
 
 class Producer {
     constructor(peliculas) {
-        const local = localStorage.getItem("peliculas");
+        console.log(peliculas);
 
+        const local = localStorage.getItem("peliculas");
+        // console.log(local)
         if(!local) {
-            localStorage.setItem("peliculas", JSON.stringify(this.peliculas))
-            this.peliculas = peliculas;
+            this.peliculas = JSON.stringify(peliculas);
+            localStorage.setItem("peliculas", this.peliculas)
+            
+            
+            console.log(this.peliculas)
         } else {
+            
             this.peliculas = JSON.parse(local);
+            console.log(this.peliculas)
         }
 
        
 
     }
+    
     
     add(){
         
@@ -169,7 +187,6 @@ class Producer {
                 let newPelicula={id, nombre, image, duracionHoras, categoria, año, rate};
                 
                 this.peliculas = [...this.peliculas, new Pelicula(newPelicula)]
-                // this.peliculas.push( new Pelicula({id, nombre, image, duracionHoras, categoria, año, rate}))
                 
                 localStorage.setItem("peliculas", JSON.stringify(this.peliculas))
                 
@@ -268,7 +285,7 @@ class Producer {
  
     orderPerYear(){
        
-        let sorted = this.peliculas.sort((a, b) => {
+        let sorted = peliculas.sort((a, b) => {
             const añoA = a.año;
             const añoB = b.año;
     
@@ -334,6 +351,7 @@ class Producer {
 
 }
 
+console.log(peliculas);
 
 let Netflix = new Producer(peliculas)
 
@@ -456,6 +474,13 @@ function updatingPeliculas(movies){
 let contenedorLista = document.getElementById("listaPeliculas");
 contenedorLista.append(listaPeliculas)
 
+
+
+
+}
+
+
+obtenerPeliculas();
 
 
 
