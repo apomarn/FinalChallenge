@@ -4,11 +4,11 @@
 [
     {
         "id": 1,
-        "nombre": "Alerta Azul",
+        "nombre": "Alerta Roja",
         "image": "https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2021/11/15/16369737576486.jpg",
         "duracionHoras": 2,
         "categoria": "Accion",
-        "año": 2021,
+        "año": 1,
         "rate": 1
     },
     {

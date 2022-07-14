@@ -26,15 +26,15 @@
       <div id="removerPelicula"></div>
    <div id="agregarRemover">
    
-      <input  class="boton"type="button" onClick="Netflix.add()" value="Agregar Pelicula">
+      <input  class="boton"type="button" onClick="window.Netflix.add()" value="Agregar Pelicula">
       
        
-       <input class="boton" type="button" onClick="Netflix.remove()" value="Borrar Pelicula">
+       <input class="boton" type="button" onClick="window.Netflix.remove()" value="Borrar Pelicula">
    </div>
    <div id="filter">
-    <input class="boton" type="button" onClick="Netflix.orderPerYear()" value="Ordenar por año">
+    <input class="boton" type="button" onClick="window.Netflix.orderPerYear()" value="Ordenar por año">
    </div>
-   <p id="movieQuantity" style="color:white;" onClick="Netflix.movieQuantity()">
+   <p id="movieQuantity" style="color:white;" onClick="window.Netflix.movieQuantity()">
         <!-- quantity -->
    </p>
    <div id="listaPeliculas">

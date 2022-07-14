@@ -1,6 +1,12 @@
 
+// 1-. carusel muestra peliculas con 4 o mas de rating
+// 2-. agrega peliculas
+// 3-. borra peliculas
+// 4-. ordena por peliculas por anio
+// 5-. conteo de peliculas
 
 
+//funcion que llama a mi json de peliculas
 async function obtenerPeliculas () {
    const miJSON = "/peliculas.json"
    const resp = await fetch(miJSON);
@@ -12,7 +18,7 @@ async function obtenerPeliculas () {
 
 
 
-
+    //constrictor modelo de la info de las peliculas
    class Pelicula {
     constructor(pelicula){
         this.id=pelicula.id;
@@ -26,7 +32,7 @@ async function obtenerPeliculas () {
 }
 
 
-
+// Las siguientes dos funciones hacen que los forms desaparescan
 
 function eraseAddForm() {
     const agregarPelicula = document.getElementById("agregarPelicula");
@@ -38,10 +44,15 @@ function eraseRemoveForm(){
     removePelicula.innerHTML = ``
 }
 
+
+//desaparece el div rojo conteniendo los botones de agregar y borrar
+
 function hideButtons() {
     const agregarRemover = document.getElementById("agregarRemover");
     agregarRemover.style.display = "none";
 }
+//agrega el div rojo conteniendo los botones de agregar y borrar
+
 function showButtons() {
     const agregarRemover = document.getElementById("agregarRemover");
     agregarRemover.style.display = "block";
@@ -71,7 +82,7 @@ class Producer {
 
     }
     
-    
+    //funcion que desaparece los botones de agregar y borrar, y llama al formulario
     add(){
         
         this.showForm();
@@ -79,6 +90,8 @@ class Producer {
     
             
     }
+
+    //el form para agregar una pelicula
     showForm() {
 
         const agregarPelicula = document.getElementById("agregarPelicula")
@@ -121,6 +134,7 @@ class Producer {
             </form>
                 `
 
+                //css para el form
             let form = document.getElementById("form");
             form.style.display="flex";
             form.style.flexDirection="column";
@@ -147,6 +161,7 @@ class Producer {
     
     }
     
+    
     inputChecked (array) {
         console.log(array)
         let peliculaChecked = [];
@@ -158,6 +173,8 @@ class Producer {
 
             return peliculaChecked;
     }
+
+    //agarrando la info de los inputs y guardandolo en el local storage
     onSubmitAdd(){
 
         console.log("onsubmit")
@@ -200,6 +217,8 @@ class Producer {
                 showButtons();
     }
     
+
+    //form para elimina las peliculas
     remove(){
 
         hideButtons();
@@ -250,6 +269,7 @@ class Producer {
    
     }
 
+    //funcion que elimina las peliculas
     onSubmitRemove () {
         let removeArray = document.getElementsByClassName("listaRemover");
         let removeChecked = this.inputChecked(removeArray);
@@ -267,7 +287,7 @@ class Producer {
         this.peliculas = leftPeliculas
         localStorage.setItem("peliculas", JSON.stringify(this.peliculas))
 
-
+        //confirmacion de borrado
         Swal.fire({
             title: 'Genial!',
             text: 'Borraste una pelicula!',
@@ -275,7 +295,7 @@ class Producer {
             confirmButtonText: 'Cool'
            })
 
- 
+         //despues de eliminar hago update de las peliculas en display, y update de el contado, borra el formulario y agrega el div rojo  
          updatingPeliculas(this.peliculas);
          this.movieQuantity();
          eraseRemoveForm();
@@ -283,6 +303,7 @@ class Producer {
            
     }
  
+    //ordena las peliculas por anio
     orderPerYear(){
        
         let sorted = peliculas.sort((a, b) => {
@@ -291,7 +312,6 @@ class Producer {
     
             let comparison = 0;
 
-            // añoA > añoB ? comparison = 1 : comparison = -1;
 
             if (añoA > añoB) {
                 comparison = 1;
@@ -304,6 +324,8 @@ class Producer {
        updatingPeliculas(sorted);
     }
 
+
+    //en el carusel de bootstrap solo se mjuestra las peliculas recomendadas basadas en su rating de 4 puntos a mas.
     recommended(){
 
         let recomendados = []
@@ -335,7 +357,7 @@ class Producer {
         
     }
     
-
+    //funcion que muestra el total de peliculas
     movieQuantity(){
     let quantity = document.getElementById("movieQuantity");
     quantity.style.background="pink";
@@ -353,7 +375,10 @@ class Producer {
 
 console.log(peliculas);
 
-let Netflix = new Producer(peliculas)
+//incluyo nueva pelicula 
+Netflix = new Producer(peliculas)
+
+
 
 //////// Agregando estilos ////////
 let body = document.getElementById("body");
@@ -489,14 +514,3 @@ obtenerPeliculas();
 
 
 
-
-/****
- * 1-. printear pelicula nueva
- * 2-. mas opciones en filtrar
- * 3-. eliminar peliculas en el dom
- * 4-. Div para agregar y desaparecer forms para las funciones add & remove,(para ya no usar el prompt)
- * 5-. agregar detalle de cada pelicula o el trailer
- * 6-. inlcuir carousel con Bootstrap
- * 7-.?????
- * 8-.??????
- */
